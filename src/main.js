@@ -1,5 +1,20 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+// 正确路径（假设文件在 src/views/ 下）
+// 引入 Element Plus
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
+// 引入图标
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
-createApp(App).mount('#app')
+const app = createApp(App);
+
+// 注册图标
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component);
+}
+
+app.use(router)
+    .use(ElementPlus)  // 使用 Element Plus
+    .mount('#app');
